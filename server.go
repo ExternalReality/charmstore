@@ -9,8 +9,8 @@ import (
 	"sort"
 	"time"
 
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery/mgostorage"
+	"gopkg.in/macaroon-bakery.v2/bakery"
+	"gopkg.in/macaroon-bakery.v2/bakery/mgorootkeystore"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/natefinch/lumberjack.v2"
 
@@ -102,7 +102,7 @@ type ServerParams struct {
 
 	// RootKeyPolicy holds the default policy used when creating
 	// macaroon root keys.
-	RootKeyPolicy mgostorage.Policy
+	RootKeyPolicy mgorootkeystore.Policy
 
 	// MinUploadPartSize holds the minimum size of
 	// an upload part. If it's zero, a default value will be used.

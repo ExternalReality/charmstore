@@ -14,7 +14,7 @@ import (
 
 	"gopkg.in/errgo.v1"
 	"gopkg.in/goose.v2/identity"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery"
+	"gopkg.in/macaroon-bakery.v2/bakery"
 	"gopkg.in/yaml.v2"
 )
 

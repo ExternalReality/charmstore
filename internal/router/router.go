@@ -17,10 +17,11 @@ import (
 
 	"github.com/juju/httprequest"
 	"github.com/juju/utils/parallel"
+	"golang.org/x/net/context"
 	"gopkg.in/errgo.v1"
 	charm "gopkg.in/juju/charm.v6"
 	"gopkg.in/juju/charmrepo.v2/csclient/params"
-	"gopkg.in/macaroon-bakery.v2-unstable/httpbakery"
+	"gopkg.in/macaroon-bakery.v2/httpbakery"
 
 	"gopkg.in/juju/charmstore.v5/internal/monitoring"
 	"gopkg.in/juju/charmstore.v5/internal/series"
@@ -303,7 +304,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	if err := req.ParseForm(); err != nil {
-		WriteError(w, errgo.Notef(err, "cannot parse form"))
+		WriteError(context.Background(), w, errgo.Notef(err, "cannot parse form"))
 		return
 	}
 	r.handler.ServeHTTP(w, req)

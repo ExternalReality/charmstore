@@ -14,8 +14,8 @@ import (
 	"github.com/juju/loggo"
 	"gopkg.in/errgo.v1"
 	"gopkg.in/goose.v2/identity"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery"
-	"gopkg.in/macaroon-bakery.v2-unstable/httpbakery"
+	"gopkg.in/macaroon-bakery.v2/bakery"
+	"gopkg.in/macaroon-bakery.v2/httpbakery"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/natefinch/lumberjack.v2"
 

@@ -12,8 +12,8 @@ import (
 	gc "gopkg.in/check.v1"
 	errgo "gopkg.in/errgo.v1"
 	"gopkg.in/juju/charm.v6"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery/mgostorage"
+	"gopkg.in/macaroon-bakery.v2/bakery"
+	"gopkg.in/macaroon-bakery.v2/bakery/mgorootkeystore"
 	"gopkg.in/retry.v1"
 
 	"gopkg.in/juju/charmstore.v5/internal/blobstore"
@@ -105,7 +105,7 @@ func (s *ServerSuite) TestNewServerWithConfig(c *gc.C) {
 		AuthUsername     string
 		AuthPassword     string
 		IdentityLocation string
-		RootKeyPolicy    mgostorage.Policy
+		RootKeyPolicy    mgorootkeystore.Policy
 	}
 	params := ServerParams{
 		AuthUsername:     "test-user",
@@ -140,7 +140,7 @@ func (s *ServerSuite) TestNewServerWithConfig(c *gc.C) {
 			AuthUsername:     "test-user",
 			AuthPassword:     "test-password",
 			IdentityLocation: "http://0.1.2.3",
-			RootKeyPolicy: mgostorage.Policy{
+			RootKeyPolicy: mgorootkeystore.Policy{
 				ExpiryDuration: defaultRootKeyExpiryDuration,
 			},
 		},

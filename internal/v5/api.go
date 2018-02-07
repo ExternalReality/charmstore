@@ -22,10 +22,10 @@ import (
 	"gopkg.in/errgo.v1"
 	"gopkg.in/juju/charm.v6"
 	"gopkg.in/juju/charmrepo.v2/csclient/params"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery/checkers"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery/mgostorage"
-	"gopkg.in/macaroon-bakery.v2-unstable/httpbakery"
+	"gopkg.in/macaroon-bakery.v2/bakery"
+	"gopkg.in/macaroon-bakery.v2/bakery/checkers"
+	"gopkg.in/macaroon-bakery.v2/bakery/mgorootkeystore"
+	"gopkg.in/macaroon-bakery.v2/httpbakery"
 	"gopkg.in/macaroon.v2-unstable"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -1362,7 +1362,7 @@ func (h *ReqHandler) serveDelegatableMacaroon(_ http.Header, req *http.Request) 
 		return nil, errgo.WithCausef(nil, params.ErrForbidden, "delegatable macaroon is not obtainable using admin credentials (admin %v)", auth.Admin)
 	}
 
-	longTermBakery := h.Store.BakeryWithPolicy(mgostorage.Policy{
+	longTermBakery := h.Store.BakeryWithPolicy(mgorootkeystore.Policy{
 		ExpiryDuration:   1e6 * time.Hour,     // 116 years...
 		GenerateInterval: 30 * 24 * time.Hour, // Roughly monthly.
 	})

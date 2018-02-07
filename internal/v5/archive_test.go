@@ -29,8 +29,8 @@ import (
 	"gopkg.in/juju/charm.v6"
 	"gopkg.in/juju/charmrepo.v2/csclient/params"
 	charmtesting "gopkg.in/juju/charmrepo.v2/testing"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery/checkers"
-	"gopkg.in/macaroon-bakery.v2-unstable/httpbakery"
+	"gopkg.in/macaroon-bakery.v2/bakery/checkers"
+	"gopkg.in/macaroon-bakery.v2/httpbakery"
 	"gopkg.in/macaroon.v2-unstable"
 	"gopkg.in/mgo.v2/bson"
 

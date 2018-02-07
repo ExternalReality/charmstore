@@ -17,8 +17,8 @@ import (
 	"gopkg.in/errgo.v1"
 	"gopkg.in/juju/charm.v6"
 	"gopkg.in/juju/charmrepo.v2/csclient/params"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery"
-	"gopkg.in/macaroon-bakery.v2-unstable/bakery/mgostorage"
+	"gopkg.in/macaroon-bakery.v2/bakery"
+	"gopkg.in/macaroon-bakery.v2/bakery/mgorootkeystore"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -75,7 +75,7 @@ type Pool struct {
 	closed bool
 
 	// rootKeys holds the cache of macaroon root keys.
-	rootKeys *mgostorage.RootKeys
+	rootKeys *mgorootkeystore.RootKeys
 }
 
 // reqStoreCacheSize holds the maximum number of store
@@ -111,7 +111,7 @@ func NewPool(db *mgo.Database, si *SearchIndex, bakeryParams *bakery.NewServiceP
 		config:      config,
 		run:         parallel.NewRun(maxAsyncGoroutines),
 		auditLogger: config.AuditLogger,
-		rootKeys:    mgostorage.NewRootKeys(100),
+		rootKeys:    mgorootkeystore.NewRootKeys(100),
 	}
 	if config.MaxMgoSessions > 0 {
 		p.reqStoreC = make(chan *Store, config.MaxMgoSessions)
@@ -252,7 +252,7 @@ func (p *Pool) requestStoreNB(always bool) (*Store, error) {
 // storage that returns root keys conforming to the given policy.
 //
 // If there is no configured bakery, it returns nil.
-func (s *Store) BakeryWithPolicy(policy mgostorage.Policy) *bakery.Service {
+func (s *Store) BakeryWithPolicy(policy mgorootkeystore.Policy) *bakery.Service {
 	if s.pool.bakery == nil {
 		return nil
 	}
